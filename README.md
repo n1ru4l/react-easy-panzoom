@@ -150,6 +150,7 @@ render() {
 |onPanEnd|`func`| |Fired on pan end|
 |preventPan|`func`| |Defines a function to prevent pan|
 |style|`object`| |Override the inline-styles of the root element|
+|onChange|`func`| |Called after the pan/zoom has changed|
 
 ## Methods
 By using `ref`, methods from `PanZoom` can be accessed and called to trigger manipulation functions.
