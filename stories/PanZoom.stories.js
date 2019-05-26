@@ -183,3 +183,18 @@ storiesOf('react-easy-panzoom', module)
       realPinch={boolean('Enable real pinch', false)}
     />
   ))
+  .add('onChange handler', () => {
+    return (
+      <>
+        <DefaultPanZoom
+          onChange={(data) =>{
+           console.log(data)
+          }}     
+        >
+          <Box>
+            Open the console then move me
+          </Box>
+        </DefaultPanZoom>
+      </>
+    )
+  })
