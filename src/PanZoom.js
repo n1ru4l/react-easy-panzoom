@@ -131,13 +131,19 @@ class PanZoom extends React.Component<Props> {
   }
 
   onDoubleClick = (e) => {
-    const { doubleZoomSpeed } = this.props
+    const { doubleZoomSpeed, onDoubleClick } = this.props
+    if (onDoubleClick !== undefined) {
+      onDoubleClick(e)
+    }
     const offset = this.getOffset(e)
     this.zoomTo(offset.x, offset.y, doubleZoomSpeed)
   }
 
   onMouseDown = (e) => {
-    const { preventPan } = this.props
+    const { preventPan, onMouseDown } = this.props
+    if (onMouseDown !== undefined) {
+      onMouseDown(e)
+    }
     if (this.props.disabled) {
       return
     }
@@ -224,7 +230,10 @@ class PanZoom extends React.Component<Props> {
   }
 
   onKeyDown = (e) => {
-    const { keyMapping, disableKeyInteraction } = this.props
+    const { keyMapping, disableKeyInteraction, onKeyDown } = this.props
+    if (onKeyDown !== undefined) {
+      onKeyDown(e)
+    }
 
     if (disableKeyInteraction) {
       return
@@ -265,7 +274,10 @@ class PanZoom extends React.Component<Props> {
   }
 
   onTouchStart = (e) => {
-    const { preventPan } = this.props
+    const { preventPan, onTouchStart } = this.props
+    if (onTouchStart !== undefined) {
+      onTouchStart(e)
+    }
     if (e.touches.length === 1) {
       // Drag
       const touch = e.touches[0]
@@ -671,7 +683,33 @@ class PanZoom extends React.Component<Props> {
   }
 
   render() {
-    const { children, style, disabled, disableKeyInteraction } = this.props
+    const {
+      children,
+      autoCenter,
+      autoCenterZoomLevel,
+      zoomSpeed,
+      doubleZoomSpeed,
+      disabled,
+      disableKeyInteraction,
+      realPinch,
+      keyMapping,
+      minZoom,
+      maxZoom,
+      enableBoundingBox,
+      boundaryRatioVertical,
+      boundaryRatioHorizontal,
+      noStateUpdate,
+      onPanStart,
+      onPan,
+      onPanEnd,
+      preventPan,
+      style,
+      onDoubleClick,
+      onMouseDown,
+      onKeyDown,
+      onTouchStart,
+      ...props
+    } = this.props
     const { x, y, scale, rotate } = this.state
     const { a, b, c, d, x: transformX, y: transformY} = this.getTransformMatrix(x, y, scale, rotate)
     const transform = this.getTransformMatrixString(a, b, c, d, transformX, transformY)
